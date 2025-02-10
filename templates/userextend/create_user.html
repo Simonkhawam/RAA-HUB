@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign up {% endblock %}
+
+{% block content %}
+    <br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <br><br>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Register</h3>
+                </div>
+                <form method="POST" ENCTYPE="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {{ form }}
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

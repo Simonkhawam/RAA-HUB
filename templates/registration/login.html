@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <br><br>
+                <div class="card">
+                    <br><br>
+                    <div class="header"><h3 class="text-center">Enter your credentials</h3>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {{ form }}
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+{#                            <a href="#" class="btn btn-danger">Rest Password</a>#}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

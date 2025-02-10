@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <br>
+        <h2>List of Users</h2>
+        <a href="{% url 'utilizator-create' %}" class="btn btn-primary mb-3">Add New User</a>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Station</th>
+                <th>Department</th> <!-- Added department column -->
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for utilizator in object_list %}
+                <tr>
+                    <td>{{ utilizator.id }}</td>
+                    <td>{{ utilizator.username }}</td>
+                    <td>{{ utilizator.prenume }}</td>
+                    <td>{{ utilizator.nume }}</td>
+                    <td>{{ utilizator.email }}</td>
+                    <td>{{ utilizator.tip_statie }}</td>
+                    <td>{{ utilizator.department }}</td> <!-- Render department name -->
+                    <td>
+                        <a href="{% url 'utilizator-update' utilizator.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'utilizator-delete' utilizator.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8">No users found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

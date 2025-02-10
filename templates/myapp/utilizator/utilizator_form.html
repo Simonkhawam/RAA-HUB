@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+<br>
+    <h2>{{ form.instance.id|default:"Create New User" }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.prenume.label_tag }}
+            {{ form.prenume }}
+            {% if form.prenume.errors %}
+                <div class="text-danger">{{ form.prenume.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.nume.label_tag }}
+            {{ form.nume }}
+            {% if form.nume.errors %}
+                <div class="text-danger">{{ form.nume.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="text-danger">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.parola.label_tag }}
+            {{ form.parola }}
+            {% if form.parola.errors %}
+                <div class="text-danger">{{ form.parola.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="text-danger">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.telefon.label_tag }}
+            {{ form.telefon }}
+            {% if form.telefon.errors %}
+                <div class="text-danger">{{ form.telefon.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.tip_statie.label_tag }}
+            {{ form.tip_statie }}
+            {% if form.tip_statie.errors %}
+                <div class="text-danger">{{ form.tip_statie.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.department.label_tag }}  <!-- Render label for department -->
+            {{ form.department }}  <!-- Render the department dropdown -->
+            {% if form.department.errors %}
+                <div class="text-danger">{{ form.department.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'utilizator-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
