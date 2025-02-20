@@ -89,9 +89,18 @@ WSGI_APPLICATION = 'My_Final_Project.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'sqlite:///db.sqlite3')  # Fallback to SQLite locally
+    )
 }
+
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
 
 
 # Password validation
