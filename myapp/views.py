@@ -21,7 +21,7 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'
     permission_required = "myapp.view_comanda"
-    raise_exception = True
+    raise_exception = False
 
 class ComandaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comanda
@@ -54,7 +54,7 @@ class UtilizatorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'myapp/utilizator/utilizator_list.html'
     context_object_name = 'utilizatori'
     permission_required = "myapp.view_utilizator"
-    raise_exception = True
+    raise_exception = False
 
 class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Utilizator
