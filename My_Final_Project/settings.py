@@ -120,13 +120,12 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Bucharest'
 
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
 USE_I18N = True
 
 USE_TZ = True
 
-# Date format settings
-DATE_FORMAT = "d/m/Y"
-DATE_INPUT_FORMATS = ["%d/%m/%Y"]
 
 
 # Static files (CSS, JavaScript, Images)

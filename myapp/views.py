@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Comanda, Utilizator
 from .forms import ComandaForm, UtilizatorForm
 from django.urls import reverse_lazy
 
-class ComandaCreateView(CreateView):
+class ComandaCreateView(LoginRequiredMixin,PermissionRequiredMixin, CreateView):
     model = Comanda
     form_class = ComandaForm
     template_name = 'myapp/comanda/comanda_form.html'
@@ -15,12 +15,12 @@ class ComandaCreateView(CreateView):
         # Add any additional logic if needed
         return super().form_valid(form)
 
-class ComandaListView(ListView):
+class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Comanda
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'  # Variable name used in the template
 
-class ComandaUpdateView(UpdateView):
+class ComandaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comanda
     form_class = ComandaForm
     template_name = 'myapp/comanda/comanda_form.html'
@@ -30,29 +30,29 @@ class ComandaUpdateView(UpdateView):
 
         return super().form_valid(form)
 
-class ComandaDeleteView(DeleteView):
+class ComandaDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Comanda
     template_name = 'myapp/comanda/comanda_confirm_delete.html'
     success_url = reverse_lazy('comanda-list')
 
-class UtilizatorCreateView(CreateView):
+class UtilizatorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Utilizator
     form_class = UtilizatorForm
     template_name = 'myapp/utilizator/utilizator_form.html'
     success_url = reverse_lazy('utilizator-list')
 
-class UtilizatorListView(ListView):
+class UtilizatorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_list.html'
     context_object_name = 'utilizatori'
 
-class UtilizatorUpdateView(UpdateView):
+class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Utilizator
     form_class = UtilizatorForm
     template_name = 'myapp/utilizator/utilizator_form.html'
     success_url = reverse_lazy('utilizator-list')
 
-class UtilizatorDeleteView(DeleteView):
+class UtilizatorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_confirm_delete.html'
     success_url = reverse_lazy('utilizator-list')
