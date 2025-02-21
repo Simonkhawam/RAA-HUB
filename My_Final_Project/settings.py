@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'My_Final_Project.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'sqlite:///db.sqlite3')  # Fallback to SQLite locally
+        default=os.getenv('DATABASE_URL', 'sqlite:///db.sqlite3')
     )
 }
 
@@ -136,20 +136,15 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_URL = 'static/'
 # STATICFILES_DIRS = [BASE_DIR / 'static']
-
-
-
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
@@ -164,10 +159,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 
+# EMAIL_BACKEND = ''
+# EMAIL_HOST = ''
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = ''
 
-EMAIL_BACKEND = ''
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.aplicatiedjango.ro'  # 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ro65@aplicatiedjango.ro'
+EMAIL_HOST_PASSWORD = 'Django1234!'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'ro65@aplicatiedjango.ro'
