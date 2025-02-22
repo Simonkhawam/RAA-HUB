@@ -21,7 +21,7 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Comanda
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'  # Use 'comenzi' if template is using it
-    # permission_required = "myapp.view_comanda"
+    permission_required = "myapp.view_comanda"
 
     def get_queryset(self):
         return Comanda.objects.all().order_by('id')
@@ -56,7 +56,7 @@ class UtilizatorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_list.html'
     context_object_name = 'utilizatori'
-    # permission_required = "myapp.view_utilizator"
+    permission_required = "myapp.view_utilizator"
     # raise_exception = True
 
 class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
