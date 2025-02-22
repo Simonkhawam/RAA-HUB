@@ -4,7 +4,7 @@
         <br>
         <h2>All Orders</h2>
         <a href="{% url 'comanda-create' %}" class="btn btn-primary mb-3">Add New Order</a>
-        <table id="comandaTable" class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th>ID</th>
@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for comanda in comenzi|dictsort:"id" %}
+            {% for comanda in object_list %}
                 <tr>
                     <td>{{ comanda.id }}</td>
                     <td>{{ comanda.client_name }}</td>
@@ -29,6 +29,10 @@
                         <a href="{% url 'comanda-update' comanda.id %}" class="btn btn-warning btn-sm">Edit</a>
                         <a href="{% url 'comanda-delete' comanda.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No orders found.</td>
                 </tr>
             {% endfor %}
             </tbody>
