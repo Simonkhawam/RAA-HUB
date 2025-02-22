@@ -165,9 +165,9 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 
 
-EMAIL_BACKEND = ''
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.aplicatiedjango.ro'  # 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ro65@aplicatiedjango.ro'
+EMAIL_HOST_PASSWORD = 'Django1234!'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'ro65@aplicatiedjango.ro'
