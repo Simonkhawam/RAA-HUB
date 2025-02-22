@@ -24,8 +24,7 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "myapp.view_comanda"
 
     def get_queryset(self):
-        return Comanda.objects.all().order_by('-id')
-
+        return Comanda.objects.all().order_by('id')
 
 class ComandaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comanda
