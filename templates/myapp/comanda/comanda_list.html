@@ -4,7 +4,7 @@
         <br>
         <h2>All Orders</h2>
         <a href="{% url 'comanda-create' %}" class="btn btn-primary mb-3">Add New Order</a>
-        <table class="table table-bordered table-striped">
+        <table id="comandaTable" class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th>ID</th>
@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for comanda in comenzi %}
+            {% for comanda in comenzi|dictsort:"id" %}
                 <tr>
                     <td>{{ comanda.id }}</td>
                     <td>{{ comanda.client_name }}</td>
