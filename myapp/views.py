@@ -21,7 +21,10 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'
     permission_required = "myapp.view_comanda"
-    # raise_exception = True
+
+    def get_queryset(self):
+        return Comanda.objects.all().order_by('id')  # Sort in ascending order
+
 
 class ComandaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comanda
