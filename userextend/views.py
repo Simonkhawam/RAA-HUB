@@ -29,12 +29,20 @@ class UserCreateView(CreateView):
             # trimitere mail
 
             subject = 'Noul tau cont!'  # se poate scrie orice ca subiect
-            message = f"""Felicitari {new_user.first_name}, Contul tau a fost creat cu succes!
-        Pentru autentificare te rog sa te loghezi cu link-ulo de mai jos: 
-        https://raahub-16a5dd72bf90.herokuapp.com/login/
-            
-        Bun venit in echipa RAA! 
+            message = f"""
+            <html>
+            <head></head>
+            <body>
+                <p><strong>Felicitări {new_user.first_name},</strong></p>
+                <p>Contul tău a fost creat cu succes!</p>
+                <p>Pentru autentificare, te rog să te loghezi folosind link-ul de mai jos:</p>
+                <p><a href="https://raahub-16a5dd72bf90.herokuapp.com/login/" target="_blank">
+                    https://raahub-16a5dd72bf90.herokuapp.com/login/</a></p>
+                <p><strong>Bun venit în echipa RAA!</strong></p>
+            </body>
+            </html>
             """
-            send_mail(subject, message, DEFAULT_FROM_EMAIL, [new_user.email])
+
+            send_mail(subject, message, DEFAULT_FROM_EMAIL, [new_user.email], html_message=message)
 
         return redirect('login')
