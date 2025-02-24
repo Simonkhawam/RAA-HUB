@@ -4,9 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from .models import Comanda, Utilizator
 from .forms import ComandaForm, UtilizatorForm
 from django.urls import reverse_lazy
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import get_object_or_404
 
 class ComandaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Comanda
@@ -14,7 +11,7 @@ class ComandaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     template_name = 'myapp/comanda/comanda_form.html'
     success_url = reverse_lazy('comanda-list')
     permission_required = "myapp.add_comanda"
-    raise_exception = False  # Return 403 Forbidden if permission denied
+    raise_exception = False
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -25,17 +22,7 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'
     permission_required = "myapp.view_comanda"
-    raise_exception = False  # Return 403 if permission denied
-
-    def dispatch(self, request, *args, **kwargs):
-        # Automatically grant permission if user lacks it
-        if not request.user.has_perm("myapp.view_comanda"):
-            content_type = ContentType.objects.get_for_model(Comanda)
-            permission = Permission.objects.get(content_type=content_type, codename="view_comanda")
-            request.user.user_permissions.add(permission)
-            request.user.save()
-
-        return super().dispatch(request, *args, **kwargs)
+    raise_exception = False
 
 
     def get_queryset(self):
@@ -67,12 +54,12 @@ class UtilizatorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
     permission_required = "myapp.add_utilizator"
     raise_exception = True
 
-class UtilizatorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class UtilizatorListView(LoginRequiredMixin, ListView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_list.html'
     context_object_name = 'utilizatori'
-    permission_required = "myapp.view_utilizator"
-    raise_exception = False
+    # permission_required = "myapp.view_utilizator"
+    # raise_exception = False
 
 class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Utilizator
