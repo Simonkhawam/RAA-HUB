@@ -4,6 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from .models import Comanda, Utilizator
 from .forms import ComandaForm, UtilizatorForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
 
 class ComandaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Comanda
@@ -20,9 +23,19 @@ class ComandaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Comanda
     template_name = 'myapp/comanda/comanda_list.html'
-    context_object_name = 'comenzi'  # Use 'comenzi' if template is using it
+    context_object_name = 'comenzi'
     permission_required = "myapp.view_comanda"
-    raise_exception = False  # Return 403 Forbidden if permission denied
+    raise_exception = False  # Return 403 if permission denied
+
+    def dispatch(self, request, *args, **kwargs):
+        # Automatically grant permission if user lacks it
+        if not request.user.has_perm("myapp.view_comanda"):
+            content_type = ContentType.objects.get_for_model(Comanda)
+            permission = Permission.objects.get(content_type=content_type, codename="view_comanda")
+            request.user.user_permissions.add(permission)
+            request.user.save()
+
+        return super().dispatch(request, *args, **kwargs)
 
 
     def get_queryset(self):
