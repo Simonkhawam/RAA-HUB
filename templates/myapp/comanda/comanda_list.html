@@ -3,7 +3,9 @@
     <div class="container mt-5">
         <br>
         <h2>All Orders</h2>
-        <a href="{% url 'comanda-create' %}" class="btn btn-primary mb-3">Add New Order</a>
+        {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'comanda-create' %}" class="btn btn-primary mb-3">Add New Order</a>
+        {% endif %}
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
