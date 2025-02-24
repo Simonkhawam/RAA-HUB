@@ -7,13 +7,13 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <th>ID</th>
+                <th>NR</th>
                 <th>Client Name</th>
                 <th>Status</th>
                 <th>utilizator</th>
                 <th>quantity</th>
                 <th>Final quantity</th>
+                <th>ID</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -21,12 +21,13 @@
             {% for comanda in comenzi %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ comanda.id }}</td>
                     <td>{{ comanda.client_name }}</td>
                     <td>{{ comanda.status }}</td>
                     <td>{{ comanda.utilizator }}</td>
                     <td>{{ comanda.quantity }}</td>
                     <td>{{ comanda.final_quantity }}</td>
+                    <td>{{ comanda.id }}</td>
+
                     <td>
 
                         <a href="{% url 'comanda-update' comanda.id %}" class="btn btn-warning btn-sm">Edit</a>
