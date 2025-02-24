@@ -11,7 +11,7 @@ class ComandaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     template_name = 'myapp/comanda/comanda_form.html'
     success_url = reverse_lazy('comanda-list')
     permission_required = "myapp.add_comanda"
-    # raise_exception = True  # Return 403 Forbidden if permission denied
+    raise_exception = False  # Return 403 Forbidden if permission denied
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -22,6 +22,8 @@ class ComandaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'myapp/comanda/comanda_list.html'
     context_object_name = 'comenzi'  # Use 'comenzi' if template is using it
     permission_required = "myapp.view_comanda"
+    raise_exception = False  # Return 403 Forbidden if permission denied
+
 
     def get_queryset(self):
         return Comanda.objects.all().order_by('id')
@@ -32,7 +34,7 @@ class ComandaUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     template_name = 'myapp/comanda/comanda_form.html'
     success_url = reverse_lazy('comanda-list')
     permission_required = "myapp.change_comanda"
-    # raise_exception = True
+    raise_exception = False
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -42,7 +44,7 @@ class ComandaDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     template_name = 'myapp/comanda/comanda_confirm_delete.html'
     success_url = reverse_lazy('comanda-list')
     permission_required = "myapp.delete_comanda"
-    # raise_exception = True
+    raise_exception = True
 
 class UtilizatorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Utilizator
@@ -50,14 +52,14 @@ class UtilizatorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
     template_name = 'myapp/utilizator/utilizator_form.html'
     success_url = reverse_lazy('utilizator-list')
     permission_required = "myapp.add_utilizator"
-    # raise_exception = True
+    raise_exception = True
 
 class UtilizatorListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_list.html'
     context_object_name = 'utilizatori'
     permission_required = "myapp.view_utilizator"
-    # raise_exception = True
+    raise_exception = False
 
 class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Utilizator
@@ -65,11 +67,11 @@ class UtilizatorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateVi
     template_name = 'myapp/utilizator/utilizator_form.html'
     success_url = reverse_lazy('utilizator-list')
     permission_required = "myapp.change_utilizator"
-    # raise_exception = True
+    raise_exception = True
 
 class UtilizatorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Utilizator
     template_name = 'myapp/utilizator/utilizator_confirm_delete.html'
     success_url = reverse_lazy('utilizator-list')
     permission_required = "myapp.delete_utilizator"
-    # raise_exception = True
+    raise_exception = True
