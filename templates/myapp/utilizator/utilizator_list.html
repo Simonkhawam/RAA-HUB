@@ -15,9 +15,9 @@
                 <th>Station</th>
                 <th>Department</th>
                 <th>ID</th>
-                    {% if user.is_authenticated and user.is_staff %}
-                        <th>Actions</th>
-                    {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                    <th>Actions</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -37,8 +37,11 @@
                                class="btn btn-warning btn-sm">Edit</a>
                             <a href="{% url 'utilizator-delete' utilizator.id %}"
                                class="btn btn-danger btn-sm">Delete</a>
+                        {% else %}
+                            &nbsp;
                         {% endif %}
                     </td>
+
                 </tr>
             {% empty %}
                 <tr>
